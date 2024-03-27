@@ -1,4 +1,4 @@
-function generateSudokuPuzzles(difficulty) {
+function generateSudokuPuzzle(difficulty) {
     let numFilledCells = 0;
     switch (difficulty) {
         case "easy":
