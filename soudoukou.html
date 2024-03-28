@@ -6,14 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="soudoukou.css">
-    <script src="soudoukou.js"></script>
 </head>
 
 <body>
 
     <form method="post" id="myform">
         <fieldset>
-            <legend><strong>Hard</strong></legend>
+            <legend><strong id="title">Select a level</strong></legend>
             <div class="main">
                 <div class="left">
                     <div class="container">
@@ -171,30 +170,48 @@
                 <div class="right">
 
                     <div class="level">
-                        <div>set timer
+                        <div id="desable_setup">
                             <select name="timer" id="timer" style="outline: none;margin: 4%;">
-                                <option value="No">No</option>
-                                <option value="Yes">Yes</option>
+                                <option value="false">No</option>
+                                <option value="true">Yes</option>
                             </select>
-                            <div>
-                                <input type="number" name="sec" min="0" max="60">
-                                <label for="sec">s</label>
-                                <input type="number" name="sec" min="0" max="60">
-                                <label for="sec">m</label>
-                                <input type="number" name="sec" min="0" max="60">
-                                <label for="sec">h</label>
-                                <div id="time" style="border: none;margin: 0%;">00:00:00</div>
-                                <div id="chro" style="border: none;margin: 0%;">00:00:00</div>
-                                <button onclick="start()">Start</button><br>
-                                <button onclick="reset()">Reset</button><br>
-                                <button onclick="stop()">Stop</button><br>
+                            <div style="padding: 0.5vw;">
+                                <div id="chro" style="padding: 0.5vw;">
+                                    <input type="number" name="sec" min="0" max="60">
+                                    <label for="sec">s</label>
+                                    <input type="number" name="sec" min="0" max="60">
+                                    <label for="sec">m</label>
+                                    <input type="number" name="sec" min="0" max="60">
+                                    <label for="sec">h</label>
+                                    <div id="time" style="border: none;margin: 0%;">00:00:00</div>
+                                    <div id="chro" style="border: none;margin: 0%;">00:00:00</div>
+                                </div>
+                                <div id="start" style="pointer-events: none;">Start</div>
                             </div>
                         </div>
-                        <div id="easy" onclick="hello()">Easy</div>
-                        <div id="med">Medume</div>
-                        <div id="hard">Hard</div>
-                        <div id="exp">Expert</div>
+                        <div class="choice" id="easy">Easy</div>
+                        <div class="choice" id="med">Medume</div>
+                        <div class="choice" id="hard">Hard</div>
+                        <div class="choice" id="exp">Expert</div>
+                        <div id="new_game">New game</div>
                     </div>
+                    <script class="clicks">
+                        let easy_but = document.getElementById("easy");
+                        easy_but.addEventListener('click', function () { fillpuzzle("Easy") });
+                        let med_but = document.getElementById("med");
+                        med_but.addEventListener('click', function () { fillpuzzle("Medume") });
+                        let hard_but = document.getElementById("hard");
+                        hard_but.addEventListener('click', function () { fillpuzzle("Hard") });
+                        let exp_but = document.getElementById("exp");
+                        exp_but.addEventListener('click', function () { fillpuzzle("Expert");})
+                        let ref = document.getElementById("new_game");
+                        ref.addEventListener('click', function () { refresh() });
+                        let play = document.getElementById("start");
+                        play.addEventListener('click', function () { start() });
+                        let timer = document.getElementById("timer");
+                        timer.addEventListener('click', function(){set_timer()});
+                    </script>
+                    <script src="soudoukou.js"></script>
                 </div>
             </div>
         </fieldset>

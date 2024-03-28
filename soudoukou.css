@@ -81,8 +81,10 @@ input[type="number"] {
 input[type="number"]:focus {
     width: 30%;
 }
-
-.chro {
+.new_game{
+    height: 6vw;
+}
+/* .chro {
     margin: 0%;
     border: none;
-}
+} */
