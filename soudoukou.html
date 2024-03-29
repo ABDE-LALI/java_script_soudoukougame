@@ -162,8 +162,8 @@
                         </div>
                     </div>
                     <div class="but">
-                        <input type="submit" value="check">
-                        <input type="reset">
+                        <input id="check" type="button" value="check" disabled onclick="check_solve()">
+                        <input id="reset" type="reset" disabled>
                     </div>
                 </div>
                 <div class="separat"></div>
@@ -171,20 +171,20 @@
 
                     <div class="level">
                         <div id="desable_setup">
-                            <select name="timer" id="timer" style="outline: none;margin: 4%;">
+                            <select name="timer" id="timer" style="outline: none;margin: 4%; width:36vw;">
                                 <option value="false">No</option>
                                 <option value="true">Yes</option>
                             </select>
                             <div style="padding: 0.5vw;">
                                 <div id="chro" style="padding: 0.5vw;">
-                                    <input type="number" name="sec" min="0" max="60">
-                                    <label for="sec">s</label>
-                                    <input type="number" name="sec" min="0" max="60">
-                                    <label for="sec">m</label>
-                                    <input type="number" name="sec" min="0" max="60">
+                                    <input pattern="[1-9]" type="number" name="sec" min="0" max="60" id="h" value="0">
                                     <label for="sec">h</label>
-                                    <div id="time" style="border: none;margin: 0%;">00:00:00</div>
-                                    <div id="chro" style="border: none;margin: 0%;">00:00:00</div>
+                                    <input type="number" name="sec" min="0" max="60" id="m" value="0">
+                                    <label for="sec">m</label>
+                                    <input type="number" name="sec" min="0" max="60" id="s" value="0">
+                                    <label for="sec">s</label>
+                                    <div id="time"><span id="haha">0</span>h<span id="minii">0</span>min<span class="check_sec1">0</span>sec</div>
+                                    <div id="chrono"><span id="h_val">0</span>h<span id="min_val">0</span>min<span id="sec_val">0</span>sec</div>
                                 </div>
                                 <div id="start" style="pointer-events: none;">Start</div>
                             </div>
@@ -197,15 +197,15 @@
                     </div>
                     <script class="clicks">
                         let easy_but = document.getElementById("easy");
-                        easy_but.addEventListener('click', function () { fillpuzzle("Easy") });
+                        easy_but.addEventListener('click', function () { set_up_puzzle("Easy") });
                         let med_but = document.getElementById("med");
-                        med_but.addEventListener('click', function () { fillpuzzle("Medume") });
+                        med_but.addEventListener('click', function () { set_up_puzzle("Medume") });
                         let hard_but = document.getElementById("hard");
-                        hard_but.addEventListener('click', function () { fillpuzzle("Hard") });
+                        hard_but.addEventListener('click', function () { set_up_puzzle("Hard") });
                         let exp_but = document.getElementById("exp");
-                        exp_but.addEventListener('click', function () { fillpuzzle("Expert");})
+                        exp_but.addEventListener('click', function () { set_up_puzzle("Expert");})
                         let ref = document.getElementById("new_game");
-                        ref.addEventListener('click', function () { refresh() });
+                        ref.addEventListener('click', function () { New_geme() });
                         let play = document.getElementById("start");
                         play.addEventListener('click', function () { start() });
                         let timer = document.getElementById("timer");
