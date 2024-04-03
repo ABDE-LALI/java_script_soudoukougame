@@ -9,10 +9,12 @@
 </head>
 
 <body>
-
-    <form method="post" id="myform">
+    <form method="post" id="myform" action="submit.php" method="post">
         <fieldset>
-            <legend><strong id="title">Select a level</strong></legend>
+            <div id="game_over">Game Over</div>
+            <div id="puzzel_solved">Puzzel Solved</div>
+            <legend><strong style="background-color: rgba(218, 196, 32, 0.157)" id="title">Select a level</strong>
+            </legend>
             <div class="main">
                 <div class="left">
                     <div class="container">
@@ -162,20 +164,22 @@
                         </div>
                     </div>
                     <div class="but">
-                        <input id="check" type="button" value="check" disabled onclick="check_solve()">
+                        <input id="check" type="button" value="check" disabled onclick="check_solve('true')">
                         <input id="reset" type="reset" disabled>
                     </div>
                 </div>
                 <div class="separat"></div>
-                <div class="right">
+                <div class="right" style="font-weight: 600;">
 
                     <div class="level">
-                        <div id="desable_setup">
-                            <select name="timer" id="timer" style="outline: none;margin: 4%; width:36vw;">
+                        <div id="desable_setup" style="background-color: aliceblue;">
+                            <span style="font-weight: bold;">Set timer</span>
+                            <select name="timer" id="timer"
+                                style="outline: none;margin: 4%; width:36vw;background-color: rgba(162, 210, 255, 0.298);">
                                 <option value="false">No</option>
                                 <option value="true">Yes</option>
                             </select>
-                            <div style="padding: 0.5vw;">
+                            <div style="padding: 0.5vw; background-color: rgba(162, 210, 255, 0.298);">
                                 <div id="chro" style="padding: 0.5vw;">
                                     <input pattern="[1-9]" type="number" name="sec" min="0" max="60" id="h" value="0">
                                     <label for="sec">h</label>
@@ -183,17 +187,20 @@
                                     <label for="sec">m</label>
                                     <input type="number" name="sec" min="0" max="60" id="s" value="0">
                                     <label for="sec">s</label>
-                                    <div id="time"><span id="haha">0</span>h<span id="minii">0</span>min<span class="check_sec1">0</span>sec</div>
-                                    <div id="chrono"><span id="h_val">0</span>h<span id="min_val">0</span>min<span id="sec_val">0</span>sec</div>
+                                    <div id="time" style="background-color: crimson;"><span id="haha">0</span>h<span
+                                            id="minii">0</span>min<span class="check_sec1">0</span>sec</div>
+                                    <div id="chrono" style="background-color: rgba(142, 236, 0, 0.728);"><span
+                                            id="h_val">0</span>h<span id="min_val">0</span>min<span
+                                            id="sec_val">0</span>sec</div>
                                 </div>
-                                <div id="start" style="pointer-events: none;">Start</div>
+                                <div id="start" style="pointer-events: none; background-color: gray">Start</div>
                             </div>
                         </div>
                         <div class="choice" id="easy">Easy</div>
                         <div class="choice" id="med">Medume</div>
                         <div class="choice" id="hard">Hard</div>
                         <div class="choice" id="exp">Expert</div>
-                        <div id="new_game">New game</div>
+                        <div id="new_game" style="background-color:gold;height: 3vw;">New game</div>
                     </div>
                     <script class="clicks">
                         let easy_but = document.getElementById("easy");
@@ -203,13 +210,13 @@
                         let hard_but = document.getElementById("hard");
                         hard_but.addEventListener('click', function () { set_up_puzzle("Hard") });
                         let exp_but = document.getElementById("exp");
-                        exp_but.addEventListener('click', function () { set_up_puzzle("Expert");})
+                        exp_but.addEventListener('click', function () { set_up_puzzle("Expert"); })
                         let ref = document.getElementById("new_game");
                         ref.addEventListener('click', function () { New_geme() });
                         let play = document.getElementById("start");
                         play.addEventListener('click', function () { start() });
                         let timer = document.getElementById("timer");
-                        timer.addEventListener('click', function(){set_timer()});
+                        timer.addEventListener('click', function () { set_timer() });
                     </script>
                     <script src="soudoukou.js"></script>
                 </div>

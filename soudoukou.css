@@ -19,6 +19,7 @@ body {
 
 fieldset {
     padding: 1%;
+    background-color: rgba(32, 178, 218, 0.087);
 }
 
 .container input {
@@ -59,7 +60,7 @@ fieldset {
 }
 
 .color {
-    background-color: aquamarine;
+    background-color: rgba(136, 136, 136, 0.526);
 }
 
 .right {
@@ -81,10 +82,49 @@ input[type="number"] {
 input[type="number"]:focus {
     width: 30%;
 }
-.new_game{
+
+.new_game {
     height: 6vw;
 }
-/* .chro {
-    margin: 0%;
-    border: none;
-} */
+
+#easy {
+    background-color: rgba(0, 108, 197, 0.508);
+}
+
+#med {
+    background-color: rgba(229, 255, 0, 0.637);
+}
+
+#hard {
+    background-color: rgba(232, 163, 27, 0.627);
+}
+
+#exp {
+    background-color: rgba(255, 0, 0, 0.572);
+}
+#game_over{
+    display:none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: 900;
+    font-size: 7vw;background-color: crimson;
+    color: rgb(0, 0, 0);
+    border: 1vw solid rgb(0, 0, 0);
+    border-radius: 0.8vw;
+    padding:0 6vw;
+}
+#puzzel_solved{
+    display:none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: 900;
+    font-size: 7vw;background-color: rgb(15, 203, 2);
+    color: rgb(0, 0, 0);
+    border: 1vw solid rgb(0, 0, 0);
+    border-radius: 0.8vw;
+    padding:0 3vw;
+}

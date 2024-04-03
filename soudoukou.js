@@ -69,26 +69,53 @@ function set_up_puzzle(level) {
     for (let i = 0; i < 9; i++) {
         for (let j = 0; j < 9; j++) {
             fild = document.getElementById(`${i + 1}${j + 1}`);
+            document.getElementById(`${i + 1}${j + 1}`).setAttribute("style", "background-color: none;")
             if (fild.value != null) {
                 document.getElementById(`${i + 1}${j + 1}`).setAttribute("value", `${""}`)
                 document.getElementById(`${i + 1}${j + 1}`).disabled = false;
             }
         }
     }
+    let back_color;
     for (let i = 0; i < 9; i++) {
         for (let j = 0; j < 9; j++) {
             document.getElementById(`${i + 1}${j + 1}`).disabled = true;
             if (puzzle[i][j] != null) {
                 document.getElementById(`${i + 1}${j + 1}`).setAttribute("value", `${puzzle[i][j]}`)
+                switch (level) {
+                    case "Easy":
+                        document.getElementById(`${i + 1}${j + 1}`).setAttribute("style", "background-color: rgba(0, 140, 255, 0.572);")
+                        back_color = "rgba(0, 140, 255, 0.2)";
+                        break;
+                    case "Medume":
+                        document.getElementById(`${i + 1}${j + 1}`).setAttribute("style", "background-color: rgba(229, 255, 0, 0.60);")
+                        back_color = "rgba(229, 255, 0, 0.2)";
+                        break;
+                    case "Hard":
+                        document.getElementById(`${i + 1}${j + 1}`).setAttribute("style", "background-color: rgba(255, 170, 0, 0.627);")
+                        back_color = "rgba(255, 170, 0, 0.2)";
+                        break;
+                    case "Expert":
+                        document.getElementById(`${i + 1}${j + 1}`).setAttribute("style", "background-color: rgba(255, 0, 0, 0.572);")
+                        back_color = "rgba(255, 0, 0, 0.2)";
+                        break;
+                }
             }
         }
     }
+    let level_color = document.getElementsByClassName("color");
+    let level_color_len = level_color.length;
+    for (let i = 0; i < level_color_len; i++) {
+        if (!level_color[i].value)
+            level_color[i].setAttribute("style", "background-color:" + `${back_color}`);
+    }
     let title_level = document.getElementById("title")
     title_level.innerHTML = `${level}`;
-    document.getElementById("start").setAttribute("style", "pointer-events: all;")
+    document.getElementById("start").setAttribute("style", "pointer-events: all;background-color:rgba(0, 255, 0, 0.804);")
 }
 function disable_levels() {
     let level_but = document.getElementsByClassName("choice");
+    document.getElementById("start").setAttribute("style", "pointer-events: all;background-color:gray;")
     let level_but_len = level_but.length
     for (let i = 0; i < level_but_len; i++) {
         level_but[i].setAttribute("style", "pointer-events: none; background-color: gray;")
@@ -115,11 +142,22 @@ function start() {
                 secondsc = 0;
                 document.getElementById("sec_val").innerHTML = `${secondsc}`
             }
-            if (Number(document.getElementById("min_val").innerHTML) == Number(minst)  && Number(document.getElementById("sec_val").innerHTML) >= Number(secondst) && document.getElementById("h_val").innerHTML == 0) {
-                alert("game over!?");
-                clearInterval(timer);
-                disable_inputs();
-                document.getElementById("sec_val").innerHTML = `${secondsc}`
+            if (Number(document.getElementById("min_val").innerHTML) == Number(minst) && Number(document.getElementById("sec_val").innerHTML) >= Number(secondst) && document.getElementById("h_val").innerHTML == 0) {
+                if (check_solve('false')) {
+                    document.getElementById("chrono").setAttribute("style", "background-color:crimson;")
+                    let game_over = document.getElementById("game_over");
+                    game_over.style.display = "block";
+                    clearInterval(timer);
+                    disable_inputs();
+                    document.getElementById('check').disabled = true;
+                    document.getElementById('reset').disabled = true;
+                    document.getElementById("sec_val").innerHTML = `${secondsc}`
+                }
+                else {
+                    let puzzle_solved = document.getElementById("puzzel_solved");
+                    puzzle_solved.style.display = "block";
+                    console.log("khoud3aaaa");
+                }
             }
             console.log(secondsc);
         }
@@ -199,8 +237,18 @@ function check_squar(Sudoku) {
     return true;
 }
 
-function check_solve() {
-    let puzzle = [];
+function check_solve(check_but) {
+    let puzzle =[]; /* [
+        [3, 1, 6, 5, 7, 8, 4, 9, 2],
+        [5, 2, 9, 1, 3, 4, 7, 6, 8],
+        [4, 8, 7, 6, 2, 9, 5, 3, 1],
+        [2, 6, 3, 4, 1, 5, 9, 8, 7],
+        [9, 7, 4, 8, 6, 3, 1, 2, 5],
+        [8, 5, 1, 7, 9, 2, 6, 4, 3],
+        [1, 3, 8, 9, 4, 7, 2, 5, 6],
+        [6, 9, 2, 3, 5, 1, 8, 7, 4],
+        [7, 4, 5, 2, 8, 6, 3, 1, 9]
+    ];*/
     let fild;
     for (let i = 0; i < 9; i++) {
         puzzle[i] = [];
@@ -209,10 +257,22 @@ function check_solve() {
             puzzle[i][j] = fild.value;
         }
     }
-    if (check_rows(puzzle) && check_cols(puzzle) && check_squar(puzzle)) {
-        alert("Congratulations! You have solved the Sudoku correctly!");
+    for (let i = 0; i < 9; i++) {
+        for (let j = 0; j < 9; j++) {
+            if (!/[1-9]/.test(puzzle[i][j]) && puzzle[i][j] != '') { alert("there is in accepatble character in the puzzel!?"); return false; }
+        }
+    }
+    if (check_but == 'true') {
+        if (check_rows(puzzle) && check_cols(puzzle) && check_squar(puzzle)) {
+            let puzzle_solved = document.getElementById("puzzel_solved");
+            puzzle_solved.style.display = "block";
+            console.log("khoud3aaaa1");
+        } else {
+            alert("Incorrect solution! There are duplicates in rows, columns, or squares.");
+        }
     } else {
-        alert("Incorrect solution! There are duplicates in rows, columns, or squares.");
+        if (check_rows(puzzle) && check_cols(puzzle) && check_squar(puzzle)) return false;
+        else return true;
     }
 }
 set_timer();
